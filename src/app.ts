@@ -7,9 +7,10 @@ const app = express();
 const port = process.env.PORT;
 const uri: string = process.env.DB_URI as string;
 
-mongoose
-  .connect(uri)
-  .then(() => {
+(async function connectMongoDB() {
+  try {
+    await mongoose.connect(uri);
+
     console.log('Успешное подключение к MongoDB Atlas!');
 
     const newUser = new User({
@@ -18,21 +19,15 @@ mongoose
       email: 'john@example.com',
     });
 
-    newUser
-      .save()
-      .then(() => {
-        console.log('Докумен сохранен');
-      })
-      .catch((error) => {
-        console.error('Ошибка подключения к MongoDB Atlas:', error);
-      })
-      .finally(() => {
-        mongoose.disconnect();
-      });
-  })
-  .catch((error) => {
+    await newUser.save();
+
+    console.log('Докумен сохранен');
+  } catch (error) {
     console.error('Ошибка подключения к MongoDB Atlas:', error);
-  });
+  } finally {
+    mongoose.disconnect();
+  }
+})();
 
 app.get('/', (req, res) => {
   res.send(`Привет, мир! ${port}`);
