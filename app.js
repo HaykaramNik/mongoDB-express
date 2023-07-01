@@ -14,10 +14,7 @@ const uri = process.env.DB_URI;
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
-app.set(
-  'views',
-  'views'
-);
+app.set('views', 'views');
 
 app.use(todoRouter);
 
@@ -27,7 +24,6 @@ app.use(todoRouter);
       useNewUrlParser: true,
     });
 
-
     app.listen(port, () => {
       console.log('Сервер запущен');
     });
@@ -35,7 +31,5 @@ app.use(todoRouter);
     console.log('Успешное подключение к MongoDB Atlas!');
   } catch (error) {
     console.error('Ошибка подключения к MongoDB Atlas:', error);
-  } finally {
-    mongoose.disconnect();
   }
 })();
