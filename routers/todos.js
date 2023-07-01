@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Todo from '../models/Todo.js';
+// import Todo from '../models/Todo.js';
 
 const router = Router();
 
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   res.render('index', {
     title: 'Todos list',
     isIndex: true,
-
+    // todos
   })
 });
 
