@@ -3,12 +3,12 @@ import { Schema, model } from 'mongoose';
 const schema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   completed: {
     type: Boolean,
-    default: false
-  }
-})
+    default: false,
+  },
+});
 
 export default model('Todo', schema);
